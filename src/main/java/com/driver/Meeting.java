@@ -11,7 +11,6 @@ public class Meeting {
         this.endTime = endTime;
     }
 
-
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -19,6 +18,4 @@ public class Meeting {
     public LocalTime getEndTime() {
         return endTime;
     }
-
-
 }

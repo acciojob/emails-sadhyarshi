@@ -25,28 +25,30 @@ public class Email {
         // 3. It contains at least one lowercase letter
         // 4. It contains at least one digit
         // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
-
-        int flag1 = 0, flag2 = 0, flag3 = 0, flag4 = 0,flag5=0;
-        if(oldPassword == getPassword()){
-            if(newPassword.length() >= 8){
-                flag1 = 1;
+        if (oldPassword.equals(this.password) && isValidPassword(newPassword)) {
+            this.password = newPassword;
+        }
+        private boolean isValidPassword(String password) {
+            boolean hasUpperCase = false;
+            boolean hasLowerCase = false;
+            boolean hasDigit = false;
+            boolean hasSpecialChar = false;
+            if (password.length() < 8) {
+                return false;
             }
-            for(int i = 0; i < newPassword.length(); i++) {
-                if ((newPassword.charAt(i) >= 'A' && newPassword.charAt(i) <= 'Z')) {
-                    flag2 = 1;
-                } else if ((newPassword.charAt(i) >= 'a' && newPassword.charAt(i) <= 'z')){
-                    flag3 = 1;
-                } else if ((newPassword.charAt(i) >= 48 && newPassword.charAt(i) <= 57)) {
-                    flag4 = 1;
-                }else{
-                    flag5 = 1;
+            for (int i = 0; i < password.length(); i++) {
+                char c = password.charAt(i);
+                if (Character.isUpperCase(c)) {
+                    hasUpperCase = true;
+                } else if (Character.isLowerCase(c)) {
+                    hasLowerCase = true;
+                } else if (Character.isDigit(c)) {
+                    hasDigit = true;
+                } else {
+                    hasSpecialChar = true;
                 }
             }
+            return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
         }
-
-        if((flag1+flag2+flag3+flag4+flag5)==5){
-            password = newPassword;
-        }
-
     }
 }
